@@ -1,0 +1,9 @@
+---
+foo: "foo"
+bar: "bar"
+baz: "baz"
+items:
+- qux: "qux1"
+  quux: "quux1"
+- qux: "qux2"
+  quux: "quux2"
