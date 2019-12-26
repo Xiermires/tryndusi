@@ -18,7 +18,7 @@ Expect the initial solution to offer the following features...
   <li>Scheduling using some meta-heuristics (annealing / genetic / gradient / ant colony...)
   <li>Descriptors (constraints, etc.) through YAML
   <li>Some rudimentary dashboard
-  <li>SVG rendering of the scheduled paths.
+  <li>SVG rendering
   <li>Push command / Pull variable / Subscribe event messaging
   <li>Push events through REST to external listeners
   <li>Custom pluggings which might be (optional) dynamically modifiable
