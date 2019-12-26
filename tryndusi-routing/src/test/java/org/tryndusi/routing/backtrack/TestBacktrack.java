@@ -1,4 +1,4 @@
-package org.tryndusi.routing.ucs;
+package org.tryndusi.routing.backtrack;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.contains;
@@ -17,9 +17,9 @@ import org.tryndusi.model.Actor;
 import org.tryndusi.model.PathSearch;
 import org.tryndusi.model.PathSearchFactory;
 import org.tryndusi.routing.SomeLayout;
-import org.tryndusi.routing.dijkstra.DijkstraUCS;
+import org.tryndusi.routing.recursion.BacktrackPathSearch;
 
-public class TestDijkstra extends SomeLayout {
+public class TestBacktrack extends SomeLayout {
 
 	@BeforeClass
 	public static void pre() {
@@ -28,7 +28,7 @@ public class TestDijkstra extends SomeLayout {
 			@Override
 			public PathSearch create(Function<Actor, Collection<Actor>> adjacencyOf,
 					BiFunction<Actor, Actor, Integer> edgeWeight) {
-				return new DijkstraUCS(adjacencyOf, edgeWeight);
+				return new BacktrackPathSearch(adjacencyOf, edgeWeight);
 			}
 		});
 	}

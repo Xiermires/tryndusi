@@ -31,5 +31,10 @@
 			<artifactId>tryndusi-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.tryndusi</groupId>
+			<artifactId>tryndusi-descriptor</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

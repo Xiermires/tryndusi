@@ -1,21 +1,22 @@
 package org.tryndusi.routing.dijkstra;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.tryndusi.common.graph.DRTNode;
 import org.tryndusi.model.Actor;
 import org.tryndusi.model.PathSearch;
+
+import com.google.common.collect.Lists;
 
 public class DijkstraUCS implements PathSearch {
 
@@ -27,59 +28,60 @@ public class DijkstraUCS implements PathSearch {
 		this.edgeWeight = edgeWeight;
 	}
 
-	private Map<Actor, ActorPlusWeight> knownNodes = new HashMap<>();
-
 	@Override
 	public List<Actor> computeBestPath(Actor source, Actor target) {
-		final Set<Actor> visited = new HashSet<>();
-		final Queue<ActorPlusWeight> remaining = new PriorityQueue<>(Comparator.comparingInt(f -> f.weightFromSource));
-		remaining.add(new ActorPlusWeight(source, 0, null));
+		final Map<Actor, DRTNode<Entry<Actor, Integer>>> knownActors = new HashMap<>();
+		final Queue<DRTNode<Entry<Actor, Integer>>> visitable = new PriorityQueue<>(
+				Comparator.comparingInt(f -> weight(f)));
+		visitable.add(new DRTNode<Entry<Actor, Integer>>(entryOf(source, 0), null));
 
-		while (!remaining.isEmpty()) {
-			ActorPlusWeight curr = remaining.remove();
-			if (curr.actor.equals(target)) {
-				return asList(curr);
+		while (!visitable.isEmpty()) {
+			DRTNode<Entry<Actor, Integer>> curr = visitable.remove();
+			if (actor(curr).equals(target)) {
+				return Lists.transform(curr.getPathFromRoot(), (e) -> e.getKey());
 			}
-			if (visited.contains(curr.actor)) {
+			if (knownActors.containsKey(actor(curr))) {
 				continue;
 			}
-			visited.add(curr.actor);
-			for (Actor nbr : adjacencyOf.apply(curr.actor)) {
-				final int currWeight = curr.weightFromSource + edgeWeight.apply(curr.actor, nbr);
-				ActorPlusWeight nbrNode = knownNodes.get(nbr);
-				if (nbrNode == null || nbrNode.weightFromSource > currWeight) {
-					nbrNode = new ActorPlusWeight(nbr, currWeight, curr);
-					remaining.add(nbrNode);
+			knownActors.put(actor(curr), curr);
+
+			for (Actor nbr : adjacencyOf.apply(actor(curr))) {
+				final int currWeight = weight(curr) + edgeWeight.apply(actor(curr), nbr);
+				DRTNode<Entry<Actor, Integer>> nbrNode = knownActors.get(nbr);
+				if (nbrNode == null || weight(nbrNode) > currWeight) {
+					nbrNode = new DRTNode<Entry<Actor, Integer>>(entryOf(nbr, currWeight), curr);
+					visitable.add(nbrNode);
 				}
 			}
 		}
 		return Collections.emptyList();
 	}
 
-	private List<Actor> asList(ActorPlusWeight curr) {
-		final List<Actor> result = new ArrayList<>();
-		result.add(curr.actor);
-		while (curr.predecessor != null) {
-			result.add(0, curr.predecessor.actor);
-			curr = curr.predecessor;
-		}
-		return result;
+	private int weight(DRTNode<Entry<Actor, Integer>> node) {
+		return node.getData().getValue();
 	}
 
-	private static class ActorPlusWeight {
-		final Actor actor;
-		final int weightFromSource;
-		final ActorPlusWeight predecessor;
+	private Actor actor(DRTNode<Entry<Actor, Integer>> node) {
+		return node.getData().getKey();
+	}
 
-		ActorPlusWeight(Actor a, int weight, ActorPlusWeight predecessor) {
-			this.actor = a;
-			this.weightFromSource = weight;
-			this.predecessor = predecessor;
-		}
+	private Entry<Actor, Integer> entryOf(final Actor actor, final int weight) {
+		return new Entry<Actor, Integer>() {
 
-		@Override
-		public String toString() {
-			return "ActorPlusWeight [actor=" + actor + ", weightFromSource=" + weightFromSource + "]";
-		}
+			@Override
+			public Actor getKey() {
+				return actor;
+			}
+
+			@Override
+			public Integer getValue() {
+				return weight;
+			}
+
+			@Override
+			public Integer setValue(Integer value) {
+				throw new UnsupportedOperationException("not implemented.");
+			}
+		};
 	}
 }

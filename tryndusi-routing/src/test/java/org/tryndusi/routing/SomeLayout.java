@@ -4,13 +4,14 @@ import org.tryndusi.model.geometry.BoundingBox;
 import org.tryndusi.model.impl.Device;
 import org.tryndusi.model.impl.Layout;
 
-public class SomeLayout {
+public abstract class SomeLayout {
 
 	protected final Device dev1 = new Device("dev1", BoundingBox.of(0, 0, 1, 1));
 	protected final Device dev2 = new Device("dev2", BoundingBox.of(1, 1, 2, 2));
 	protected final Device dev3 = new Device("dev3", BoundingBox.of(1, 1, 4, 4));
 	protected final Device dev4 = new Device("dev4", BoundingBox.of(1, 1, 1, 1));
 	protected final Device dev5 = new Device("dev5", BoundingBox.of(2, 2, 1, 1));
+	protected final Device lone = new Device("lone", BoundingBox.of(2, 2, 1, 1));
 
 	protected final Layout layout = new Layout();
 	{
