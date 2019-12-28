@@ -16,7 +16,7 @@ public class Device implements Actor {
 	}
 
 	@Override
-	public BoundingBox getActorShape() {
+	public BoundingBox getBoundingBox() {
 		return bbox;
 	}
 

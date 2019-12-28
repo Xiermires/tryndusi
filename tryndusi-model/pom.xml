@@ -17,9 +17,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.jfree</groupId>
-			<artifactId>jfreesvg</artifactId>
-			<version>2.0</version>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.11.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>

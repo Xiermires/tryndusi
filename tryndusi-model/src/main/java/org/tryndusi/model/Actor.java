@@ -4,7 +4,7 @@ import org.tryndusi.model.geometry.BoundingBox;
 
 public interface Actor {
 
-	BoundingBox getActorShape();
+	BoundingBox getBoundingBox();
 
 	ActorState update(Move move);
 }

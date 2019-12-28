@@ -22,4 +22,9 @@ public abstract class AbstractMove implements Move {
 	public Actor getTarget() {
 		return target;
 	}
+
+	@Override
+	public String toString() {
+		return "[" + source + " -> " + target + "]";
+	}
 }

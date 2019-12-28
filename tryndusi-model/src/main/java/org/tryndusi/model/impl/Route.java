@@ -3,15 +3,16 @@ package org.tryndusi.model.impl;
 import java.util.List;
 
 import org.tryndusi.model.Actor;
+import org.tryndusi.model.Move;
 import org.tryndusi.model.geometry.Point;
 
-public class Path extends AbstractMove {
+public class Route extends AbstractMultiMove implements Iterable<Move> {
 
 	private Point currentPosition = null;
 
-	public Path(Actor source, Actor target, List<Actor> goesThrough) {
-		super(source, target);
-		currentPosition = source.getActorShape().center();
+	public Route(Actor source, Actor target, List<Actor> shift) {
+		super(source, target, shift);
+		this.currentPosition = source.getBoundingBox().center();
 	}
 
 	@Override
