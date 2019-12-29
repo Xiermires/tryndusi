@@ -10,6 +10,8 @@ public class Device implements Actor {
 	private final String name;
 	private final BoundingBox bbox;
 
+	private ActorState state = ActorState.IDLE;
+
 	public Device(String name, BoundingBox geometry) {
 		this.name = name;
 		this.bbox = geometry;
@@ -23,6 +25,16 @@ public class Device implements Actor {
 	@Override
 	public ActorState update(Move move) {
 		return null;
+	}
+
+	@Override
+	public ActorState getState() {
+		return state;
+	}
+
+	@Override
+	public void setState(ActorState newState) {
+		state = newState;
 	}
 
 	@Override

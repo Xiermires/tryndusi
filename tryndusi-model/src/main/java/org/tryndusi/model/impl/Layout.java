@@ -17,17 +17,11 @@ import com.google.common.graph.ValueGraphBuilder;
 public class Layout extends ForwardingMutableValueGraph<Actor, Integer> {
 
 	private final MutableValueGraph<Actor, Integer> delegate = ValueGraphBuilder.directed().build();
-	private final Optional<PathSearchFactory> psf = Service.forType(PathSearchFactory.class);
-	private final PathSearch pf;
+	private PathSearch ps;
 
 	final Function<Actor, Collection<Actor>> adjacencyOf = (a) -> delegate().successors(a);
 	final BiFunction<Actor, Actor, Integer> edgeWeight = //
 			(a, b) -> delegate().edgeValue(a, b).orElse(Integer.MAX_VALUE);
-
-	public Layout() {
-		pf = psf.orElseThrow(() -> new IllegalStateException("No PathSearchFactory available.."))//
-				.create(adjacencyOf, edgeWeight);
-	}
 
 	@Override
 	protected MutableValueGraph<Actor, Integer> delegate() {
@@ -35,6 +29,15 @@ public class Layout extends ForwardingMutableValueGraph<Actor, Integer> {
 	}
 
 	public List<Actor> computeBestPath(Actor source, Actor target) {
-		return pf.computeBestPath(source, target);
+		return getPathSearch().computeBestPath(source, target);
+	}
+
+	private PathSearch getPathSearch() {
+		if (ps == null) {
+			final Optional<PathSearchFactory> psf = Service.forType(PathSearchFactory.class);
+			ps = psf.orElseThrow(() -> new IllegalStateException("No PathSearchFactory available.."))//
+					.create(adjacencyOf, edgeWeight);
+		}
+		return ps;
 	}
 }

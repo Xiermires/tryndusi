@@ -7,6 +7,7 @@ public class SVGBuilder {
 	private final XStream xstream = new XStream();
 	{
 		xstream.processAnnotations(SVGLine.class);
+		xstream.processAnnotations(SVGCircle.class);
 		xstream.processAnnotations(SVGRectangle.class);
 	}
 
@@ -29,8 +30,12 @@ public class SVGBuilder {
 		this.height += heightOffset;
 	}
 
-	public SVGLineBuilder line(int x1, int x2, int y1, int y2) {
-		return new SVGLineBuilder(this, x1, x2, y1, y2);
+	public SVGLineBuilder line(int x1, int y1, int x2, int y2) {
+		return new SVGLineBuilder(this, x1, y1, x2, y2);
+	}
+
+	public SVGCircleBuilder circle(int cx, int cy, int r) {
+		return new SVGCircleBuilder(this, cx, cy, r);
 	}
 
 	public SVGRectangleBuilder rectangle(int x, int y, int width, int height) {

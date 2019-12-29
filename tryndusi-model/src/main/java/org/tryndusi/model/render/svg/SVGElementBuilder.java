@@ -5,7 +5,7 @@ public abstract class SVGElementBuilder<B extends SVGElementBuilder<B>> {
 	protected String stroke = "black";
 	protected String strokeWidth = "1";
 	protected String strokeOpacity = "1";
-	protected String fill = "none";
+	protected String fill = "black";
 
 	protected abstract B getThis();
 

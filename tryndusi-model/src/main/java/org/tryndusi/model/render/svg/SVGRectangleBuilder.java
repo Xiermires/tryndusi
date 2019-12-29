@@ -23,5 +23,4 @@ public class SVGRectangleBuilder extends SVGElementBuilder<SVGRectangleBuilder> 
 		svgRect.setFill(fill);
 		parent.add(svgRect);
 	}
-
 }

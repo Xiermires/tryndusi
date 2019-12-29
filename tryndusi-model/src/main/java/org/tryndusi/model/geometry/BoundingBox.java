@@ -46,6 +46,14 @@ public class BoundingBox {
 		return union;
 	}
 
+	public boolean isPoint() {
+		return getArea() == 0;
+	}
+
+	public boolean isLine() {
+		return getWidth() == 0 || getHeight() == 0;
+	}
+
 	public float getMinX() {
 		return minX;
 	}

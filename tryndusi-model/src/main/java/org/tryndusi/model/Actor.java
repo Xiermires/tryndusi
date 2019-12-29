@@ -7,4 +7,8 @@ public interface Actor {
 	BoundingBox getBoundingBox();
 
 	ActorState update(Move move);
+
+	ActorState getState();
+
+	void setState(ActorState state);
 }
