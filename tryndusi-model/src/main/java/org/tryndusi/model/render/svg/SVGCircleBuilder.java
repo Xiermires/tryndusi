@@ -20,6 +20,7 @@ public class SVGCircleBuilder extends SVGElementBuilder<SVGCircleBuilder> {
 		svgCircle.setStroke(stroke);
 		svgCircle.setStrokeWidth(strokeWidth);
 		svgCircle.setStrokeOpacity(strokeOpacity);
+		svgCircle.setStrokeDashArray(strokeDashArray);
 		svgCircle.setFill(fill);
 		parent.add(svgCircle);
 	}

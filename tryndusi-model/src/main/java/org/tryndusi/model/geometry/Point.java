@@ -10,6 +10,10 @@ public class Point {
 		this.y = y;
 	}
 
+	public float distance(Point other) {
+		return (float) Math.sqrt(Math.pow(getX() - other.getX(), 2) + Math.pow(getY() - other.getY(), 2));
+	}
+
 	public float getX() {
 		return x;
 	}

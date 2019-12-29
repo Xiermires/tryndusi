@@ -5,6 +5,7 @@ public abstract class SVGElementBuilder<B extends SVGElementBuilder<B>> {
 	protected String stroke = "black";
 	protected String strokeWidth = "1";
 	protected String strokeOpacity = "1";
+	protected String strokeDashArray = "0";
 	protected String fill = "black";
 
 	protected abstract B getThis();
@@ -21,6 +22,11 @@ public abstract class SVGElementBuilder<B extends SVGElementBuilder<B>> {
 
 	public B strokeOpacity(double strokeOpacity) {
 		this.strokeOpacity = String.valueOf(strokeOpacity);
+		return getThis();
+	}
+
+	public B strokeDashArray(double strokeDashArray) {
+		this.strokeDashArray = String.valueOf(strokeDashArray);
 		return getThis();
 	}
 

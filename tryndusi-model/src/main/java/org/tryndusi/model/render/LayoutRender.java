@@ -10,6 +10,7 @@ public class LayoutRender extends AbstractRender<Layout> {
 
 	public LayoutRender(boolean drawConnections) {
 		super(drawConnections);
+		useDottedLines(true);
 	}
 
 	@Override

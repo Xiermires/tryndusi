@@ -2,7 +2,7 @@ package org.tryndusi.model;
 
 public enum ActorState {
 
-	IDLE("green"), WAIT("yellow"), PARKED("red"), PROCESS("blue");
+	UNDEFINED("black"), IDLE("green"), WAIT("yellow"), PARKED("red"), PROCESS("blue");
 
 	private final String color;
 

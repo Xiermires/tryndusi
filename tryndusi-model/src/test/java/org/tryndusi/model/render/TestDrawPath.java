@@ -3,6 +3,7 @@ package org.tryndusi.model.render;
 import java.util.Arrays;
 
 import org.junit.Test;
+import org.tryndusi.model.ActorState;
 import org.tryndusi.model.geometry.BoundingBox;
 import org.tryndusi.model.impl.Device;
 import org.tryndusi.model.impl.Layout;
@@ -62,5 +63,23 @@ public class TestDrawPath {
 		layout.putEdgeValue(swch1, dev2, 5);
 
 		System.out.println(new String(new LayoutRender(false).draw(layout)));
+	}
+
+	@Test
+	public void shouldDrawActorsInDifferentStates() {
+		final Device dev1 = new Device("dev1", BoundingBox.of(30, 30, 60, 60));
+		dev1.setState(ActorState.PROCESS);
+		final Switch swch1 = new Switch("swch1", 145, 45);
+		final Device dev2 = new Device("dev2", BoundingBox.of(140, 140, 150, 150));
+		dev2.setState(ActorState.WAIT);
+
+		final Layout layout = new Layout();
+		layout.addNode(dev1);
+		layout.addNode(swch1);
+		layout.addNode(dev2);
+		layout.putEdgeValue(dev1, swch1, 5);
+		layout.putEdgeValue(swch1, dev2, 5);
+
+		System.out.println(new String(new LayoutRender(true).draw(layout)));
 	}
 }

@@ -20,6 +20,7 @@ public class SVGRectangleBuilder extends SVGElementBuilder<SVGRectangleBuilder> 
 		svgRect.setStroke(stroke);
 		svgRect.setStrokeWidth(strokeWidth);
 		svgRect.setStrokeOpacity(strokeOpacity);
+		svgRect.setStrokeDashArray(strokeDashArray);
 		svgRect.setFill(fill);
 		parent.add(svgRect);
 	}

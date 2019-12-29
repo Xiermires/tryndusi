@@ -20,6 +20,7 @@ public class SVGLineBuilder extends SVGElementBuilder<SVGLineBuilder> {
 		svgLine.setStroke(stroke);
 		svgLine.setStrokeWidth(strokeWidth);
 		svgLine.setStrokeOpacity(strokeOpacity);
+		svgLine.setStrokeDashArray(strokeDashArray);
 		svgLine.setFill(fill);
 		parent.add(svgLine);
 	}

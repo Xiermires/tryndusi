@@ -16,6 +16,10 @@ public abstract class SVGElement {
 	@XStreamAsAttribute
 	private String strokeOpacity = "1";
 
+	@XStreamAlias("stroke-dasharray")
+	@XStreamAsAttribute
+	private String strokeDashArray = "0";
+
 	@XStreamAsAttribute
 	private String fill = "none";
 
@@ -27,7 +31,7 @@ public abstract class SVGElement {
 		this.stroke = stroke;
 	}
 
-	public String getSrokeWidth() {
+	public String getStrokeWidth() {
 		return strokeWidth;
 	}
 
@@ -35,12 +39,20 @@ public abstract class SVGElement {
 		this.strokeWidth = srokeWidth;
 	}
 
-	public String getSrokeOpacity() {
+	public String getStrokeOpacity() {
 		return strokeOpacity;
 	}
 
 	public void setStrokeOpacity(String srokeOpacity) {
 		this.strokeOpacity = srokeOpacity;
+	}
+
+	public String getStrokeDashArray() {
+		return strokeDashArray;
+	}
+
+	public void setStrokeDashArray(String strokeDashArray) {
+		this.strokeDashArray = strokeDashArray;
 	}
 
 	public String getFill() {

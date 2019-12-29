@@ -1,5 +1,6 @@
 package org.tryndusi.model.geometry;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 public class BoundingBox {
@@ -54,6 +55,42 @@ public class BoundingBox {
 		return getWidth() == 0 || getHeight() == 0;
 	}
 
+	public float getArea() {
+		float height = getHeight();
+		float width = getWidth();
+		return height * height + width * width;
+	}
+
+	public Point closestIntersection(Segment line, Point ref) {
+		if (isPoint()) {
+			return center();
+		}
+
+		final Point topLeft = new Point(getMinX(), getMaxY());
+		final Point bottomLeft = new Point(getMinX(), getMinY());
+		final Point topRight = new Point(getMaxX(), getMaxY());
+		final Point bottomRight = new Point(getMaxX(), getMinY());
+
+		final Segment top = new Segment(topLeft, topRight);
+		final Segment left = new Segment(topLeft, bottomLeft);
+		final Segment bottom = new Segment(bottomLeft, bottomRight);
+		final Segment right = new Segment(topRight, bottomRight);
+
+		float min = Float.MAX_VALUE;
+		Segment closer = null;
+		for (Segment side : Arrays.asList(top, left, bottom, right)) {
+			Point i = null;
+			if ((i = side.intersection(line)) != null) {
+				final float d = i.distance(ref);
+				if (d < min) {
+					min = d;
+					closer = side;
+				}
+			}
+		}
+		return closer.intersection(line);
+	}
+
 	public float getMinX() {
 		return minX;
 	}
@@ -76,12 +113,6 @@ public class BoundingBox {
 
 	public float getWidth() {
 		return maxX - minX;
-	}
-
-	public float getArea() {
-		float height = getHeight();
-		float width = getWidth();
-		return height * height + width * width;
 	}
 
 	public int getIntMinX() {
@@ -142,5 +173,12 @@ public class BoundingBox {
 	@Override
 	public String toString() {
 		return "Box [minX=" + minX + ", minY=" + minY + ", maxX=" + maxX + ", maxY=" + maxY + "]";
+	}
+
+	public void expand(float top, float left, float bottom, float right) {
+		maxX += right;
+		minX += left;
+		maxY += top;
+		minY += bottom;
 	}
 }
