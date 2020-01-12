@@ -6,6 +6,6 @@ public class YAMLDescriptorFactory implements DescriptorFactory {
 
     @Override
     public YAMLDescriptor create() {
-	return new YAMLDescriptor();
+        return new YAMLDescriptor();
     }
 }

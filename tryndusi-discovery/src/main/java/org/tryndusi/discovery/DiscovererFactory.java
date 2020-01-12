@@ -5,8 +5,8 @@ import org.tryndusi.discovery.jimfs.JimfsRegistry;
 
 public interface DiscovererFactory extends Factory<Discoverer> {
 
-	@Override
-	default Discoverer create() {
-		return new JimfsRegistry();
-	}
+    @Override
+    default Discoverer create() {
+        return new JimfsRegistry();
+    }
 }

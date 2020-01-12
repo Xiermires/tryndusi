@@ -8,20 +8,20 @@ import org.tryndusi.model.geometry.Point;
 
 public class Route extends AbstractMultiMove implements Iterable<Move> {
 
-	private Point currentPosition = null;
+    private Point currentPosition = null;
 
-	public Route(Actor source, Actor target, List<Actor> shift) {
-		super(source, target, shift);
-		this.currentPosition = source.getBoundingBox().center();
-	}
+    public Route(Actor source, Actor target, List<Actor> shift) {
+        super(source, target, shift);
+        this.currentPosition = source.getBoundingBox().center();
+    }
 
-	@Override
-	public Point getCurrentPosition() {
-		return currentPosition;
-	}
+    @Override
+    public Point getCurrentPosition() {
+        return currentPosition;
+    }
 
-	@Override
-	public void update(Point position) {
-		currentPosition = position;
-	}
+    @Override
+    public void update(Point position) {
+        currentPosition = position;
+    }
 }

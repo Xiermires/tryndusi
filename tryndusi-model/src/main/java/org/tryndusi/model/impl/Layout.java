@@ -16,28 +16,28 @@ import com.google.common.graph.ValueGraphBuilder;
 
 public class Layout extends ForwardingMutableValueGraph<Actor, Integer> {
 
-	private final MutableValueGraph<Actor, Integer> delegate = ValueGraphBuilder.directed().build();
-	private PathSearch ps;
+    private final MutableValueGraph<Actor, Integer> delegate = ValueGraphBuilder.directed().build();
+    private PathSearch ps;
 
-	final Function<Actor, Collection<Actor>> adjacencyOf = (a) -> delegate().successors(a);
-	final BiFunction<Actor, Actor, Integer> edgeWeight = //
-			(a, b) -> delegate().edgeValue(a, b).orElse(Integer.MAX_VALUE);
+    final Function<Actor, Collection<Actor>> adjacencyOf = (a) -> delegate().successors(a);
+    final BiFunction<Actor, Actor, Integer> edgeWeight = //
+            (a, b) -> delegate().edgeValue(a, b).orElse(Integer.MAX_VALUE);
 
-	@Override
-	protected MutableValueGraph<Actor, Integer> delegate() {
-		return delegate;
-	}
+    @Override
+    protected MutableValueGraph<Actor, Integer> delegate() {
+        return delegate;
+    }
 
-	public List<Actor> computeBestPath(Actor source, Actor target) {
-		return getPathSearch().computeBestPath(source, target);
-	}
+    public List<Actor> computeBestPath(Actor source, Actor target) {
+        return getPathSearch().computeBestPath(source, target);
+    }
 
-	private PathSearch getPathSearch() {
-		if (ps == null) {
-			final Optional<PathSearchFactory> psf = Service.forType(PathSearchFactory.class);
-			ps = psf.orElseThrow(() -> new IllegalStateException("No PathSearchFactory available.."))//
-					.create(adjacencyOf, edgeWeight);
-		}
-		return ps;
-	}
+    private PathSearch getPathSearch() {
+        if (ps == null) {
+            final Optional<PathSearchFactory> psf = Service.forType(PathSearchFactory.class);
+            ps = psf.orElseThrow(() -> new IllegalStateException("No PathSearchFactory available.."))//
+                    .create(adjacencyOf, edgeWeight);
+        }
+        return ps;
+    }
 }

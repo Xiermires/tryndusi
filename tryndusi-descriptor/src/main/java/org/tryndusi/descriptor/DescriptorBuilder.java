@@ -5,7 +5,7 @@ import org.tryndusi.descriptor.yaml.YAMLDescriptorFactory;
 
 public class DescriptorBuilder {
 
-	public Descriptor build() {
-		return Service.forType(DescriptorFactory.class).orElse(new YAMLDescriptorFactory()).create();
-	}
+    public Descriptor build() {
+        return Service.forType(DescriptorFactory.class).orElse(new YAMLDescriptorFactory()).create();
+    }
 }
