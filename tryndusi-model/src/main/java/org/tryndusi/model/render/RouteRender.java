@@ -5,12 +5,12 @@ import org.tryndusi.model.impl.Route;
 
 public class RouteRender extends AbstractRender<Route> {
 
-	public RouteRender() {
-		super(true);
-	}
+    public RouteRender() {
+        super(true);
+    }
 
-	@Override
-	protected Iterable<Move> getMoves(Route drawable) {
-		return drawable;
-	}
+    @Override
+    protected Iterable<Move> getMoves(Route drawable) {
+        return drawable;
+    }
 }

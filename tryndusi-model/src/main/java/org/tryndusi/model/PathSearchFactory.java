@@ -6,5 +6,5 @@ import java.util.function.Function;
 
 public interface PathSearchFactory {
 
-	PathSearch create(Function<Actor, Collection<Actor>> adjacencyOf, BiFunction<Actor, Actor, Integer> edgeWeight);
+    PathSearch create(Function<Actor, Collection<Actor>> adjacencyOf, BiFunction<Actor, Actor, Integer> edgeWeight);
 }

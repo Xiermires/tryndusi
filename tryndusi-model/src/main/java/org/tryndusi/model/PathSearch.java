@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface PathSearch {
 
-	List<Actor> computeBestPath(Actor source, Actor target);
+    List<Actor> computeBestPath(Actor source, Actor target);
 }

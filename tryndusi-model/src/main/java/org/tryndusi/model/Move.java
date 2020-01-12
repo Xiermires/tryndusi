@@ -4,11 +4,11 @@ import org.tryndusi.model.geometry.Point;
 
 public interface Move {
 
-	Actor getSource();
+    Actor getSource();
 
-	Actor getTarget();
+    Actor getTarget();
 
-	Point getCurrentPosition();
+    Point getCurrentPosition();
 
-	void update(Point position);
+    void update(Point position);
 }

@@ -8,13 +8,13 @@ import org.tryndusi.model.impl.Moves;
 
 public class LayoutRender extends AbstractRender<Layout> {
 
-	public LayoutRender(boolean drawConnections) {
-		super(drawConnections);
-		useDottedLines(true);
-	}
+    public LayoutRender(boolean drawConnections) {
+        super(drawConnections);
+        useDottedLines(true);
+    }
 
-	@Override
-	protected Set<Move> getMoves(Layout layout) {
-		return Moves.defined(layout);
-	}
+    @Override
+    protected Set<Move> getMoves(Layout layout) {
+        return Moves.defined(layout);
+    }
 }
